@@ -41,7 +41,7 @@ export default{
                 res.send({
                     msg: "You have successfully created an admin account."
                 })  
-            })
+            });
         }catch(error){
             res.status(500).send({
                 error: "Internal Server Error!"
