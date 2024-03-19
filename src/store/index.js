@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 
 axios.defaults.withCredentials = true;
 
-const baseUrl = 'https://capstone-project-4.onrender.com'
+const baseUrl = 'https://backup-capstone.onrender.com'
   
 export default createStore({
   state: {
@@ -49,7 +49,7 @@ export default createStore({
     //get all users
     async getUsers({commit}){
       try{
-        let users = await axios.get(baseUrl + '/users')
+        let users = await axios.get(baseUrl + '/admins')
         console.log(users);
         commit('setUsers', users.data)
       }catch(error){
@@ -61,7 +61,7 @@ export default createStore({
     //get one user
     async getOneUser({commit}, userDetails){
       try{
-        await axios.get(baseUrl + '/users', userDetails)
+        await axios.get(baseUrl + '/admins', userDetails)
         window.location.reload()
       }catch(err){
         console.error(err);
@@ -72,7 +72,7 @@ export default createStore({
     //delete user
     async deleteUser({commit}, user_ID){
       try{
-        let {data}= await axios.delete(baseUrl + '/users/' + user_ID)
+        let {data}= await axios.delete(baseUrl + '/admins/' + user_ID)
         if (data.msg){
           Swal.fire(data.msg)
         }else{
@@ -88,7 +88,7 @@ export default createStore({
     //update user
     async editUser({commit}, update){
       try{
-        let {data} = await axios.patch(baseUrl + '/users/' + update.user_ID, update)
+        let {data} = await axios.patch(baseUrl + '/admins/' + update.user_ID, update)
         if (data.msg){
           Swal.fire(data.msg)
         }else{
@@ -105,7 +105,7 @@ export default createStore({
     async addUser({commit}, add){
       try{
         console.log(add);
-        let {data} = await axios.post(baseUrl + '/users', add)
+        let {data} = await axios.post(baseUrl + '/admins', add)
         // alert(data.msg)
         Swal.fire(data.msg)
         window.location.reload()
@@ -120,83 +120,83 @@ export default createStore({
     //ADMINS
 
     //get all admins
-    async getAdmins({commit}){
-      try{
-        let admins = await axios.get(baseUrl + '/admins')
-        console.log(admins);
-        commit('setAdmins', admins.data)
-      }catch(err){
-        console.error(err);
-        Swal.fire('Error fetching admins ', err)
-      }
-    },
+    // async getAdmins({commit}){
+    //   try{
+    //     let admins = await axios.get(baseUrl + '/admins')
+    //     console.log(admins);
+    //     commit('setAdmins', admins.data)
+    //   }catch(err){
+    //     console.error(err);
+    //     Swal.fire('Error fetching admins ', err)
+    //   }
+    // },
 
     //get one admin
-    async getOneAdmin({commit}, adminDetails){
-      try{
-        await axios.get(baseUrl + '/admins', adminDetails)
-        window.location.reload()
-      }catch(err){
-        console.error(err);
-        Swal.fire('Error fetching one admin ', err)
-      }
-    },
+    // async getOneAdmin({commit}, adminDetails){
+    //   try{
+    //     await axios.get(baseUrl + '/admins', adminDetails)
+    //     window.location.reload()
+    //   }catch(err){
+    //     console.error(err);
+    //     Swal.fire('Error fetching one admin ', err)
+    //   }
+    // },
 
     //delete admin
-    async deleteAdmin({commit}, admin_ID){
-      try{
-        console.log(admin_ID);
-        let {data} = await axios.delete(baseUrl + '/admins/' + admin_ID)
-        if(data.msg){
-          Swal.fire(data.msg)
-        }else{
-          Swal.fire("Successfully Deleted Account.")
-        }
-        window.location.reload()
-      }catch(err){
-        console.error(err);
-        Swal.fire('Error deleting admin ', err)
-      }
-    },
+    // async deleteAdmin({commit}, admin_ID){
+    //   try{
+    //     console.log(admin_ID);
+    //     let {data} = await axios.delete(baseUrl + '/admins/' + admin_ID)
+    //     if(data.msg){
+    //       Swal.fire(data.msg)
+    //     }else{
+    //       Swal.fire("Successfully Deleted Account.")
+    //     }
+    //     window.location.reload()
+    //   }catch(err){
+    //     console.error(err);
+    //     Swal.fire('Error deleting admin ', err)
+    //   }
+    // },
 
     //update admin
-    async editAdmins({commit}, update){
-      try{
-        let {data} = await axios.patch(baseUrl + '/admins/' + update.admin_ID, update)
-        if(data.msg){
-          Swal.fire(data.msg)
-        }else{
-          Swal.fire("Successfully Updated Account.")
-        }
-        window.location.reload()
-      }catch(err){
-        console.error(err);
-        Swal.fire('Error updating admin ', err)
-      }
-    },
+    // async editAdmins({commit}, update){
+    //   try{
+    //     let {data} = await axios.patch(baseUrl + '/admins/' + update.admin_ID, update)
+    //     if(data.msg){
+    //       Swal.fire(data.msg)
+    //     }else{
+    //       Swal.fire("Successfully Updated Account.")
+    //     }
+    //     window.location.reload()
+    //   }catch(err){
+    //     console.error(err);
+    //     Swal.fire('Error updating admin ', err)
+    //   }
+    // },
 
     //add admin
-    async addAdmin({commit}, add){
+    // async addAdmin({commit}, add){
       
-      try{
-        console.log(add);
-        let {data} = await axios.post(baseUrl + '/admins' , add)
-        // alert(data.msg)
-        // window.location.reload()
-        Swal.fire(data.msg)
-      }catch (err){
-        console.error('Error adding admin ', err);
-        Swal.fire('Error adding admin ', err)
-      }
-    },
+    //   try{
+    //     console.log(add);
+    //     let {data} = await axios.post(baseUrl + '/admins' , add)
+    //     // alert(data.msg)
+    //     // window.location.reload()
+    //     Swal.fire(data.msg)
+    //   }catch (err){
+    //     console.error('Error adding admin ', err);
+    //     Swal.fire('Error adding admin ', err)
+    //   }
+    // },
 
     //login as admin
-    async loginAdmin({commit}, admin_Password){
-        console.log(admin_Password);
-        let {data} = await axios.post(baseUrl + '/login', admin_Password)
+    async loginAdmin({commit}, user_Password){
+        console.log(user_Password);
+        let {data} = await axios.post(baseUrl + '/login', user_Password)
 
-        const adminDetails = data.admins
-        commit('setAdmin', adminDetails)
+        const userDetails = data.users
+        commit('setUsers', userDetails)
   
         $cookies.set('jwt', data.token)
         commit('setLoginMessage', data.msg)
