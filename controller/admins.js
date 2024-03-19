@@ -28,26 +28,26 @@ export default{
     registerAdmin: async (req,res)=>{
         try{
             const {user_Name, user_Surname, user_Age, user_Gender, user_Email, user_Password, user_Role, user_Image} = req.body
-            const hashedPassword = await bcrypt.hash(user_Password, saltRounds);
-            await registerAdmin(user_Name, user_Surname, user_Age, user_Gender, user_Email, user_Password, user_Role, user_Image, hashedPassword)
-            res.send(
-                // await getAdmins()
-                {
-                msg: "You have successfully created an admin account."
-                }
-            )
+            // const hashedPassword = await bcrypt.hash(user_Password, 10);
+            // await registerAdmin(user_Name, user_Surname, user_Age, user_Gender, user_Email, user_Password, user_Role, user_Image, hashedPassword)
+            // res.send(
+            //     // await getAdmins()
+            //     {
+            //     msg: "You have successfully created an admin account."
+            //     }
+            // )
+            bcrypt.hash(user_Password, 10, async(err,hash)=>{
+                if(err) throw err
+                await registerAdmin(user_Name, user_Surname, user_Age, user_Gender, user_Email, user_Role, user_Image, hash)
+                res.send({
+                    msg: "You have successfully created an admin account."
+                })  
+            })
         }catch(error){
             res.status(500).send({
                 error: "Internal Server Error!"
             })
         }
-        // bcrypt.hash(user_Password, 10, async(err,hash)=>{
-        //     if(err) throw err
-        //     await registerAdmin(user_Name, user_Surname, user_Age, user_Gender, user_Email, user_Role, user_Image, hash)
-        //     res.send({
-        //         msg: "You have successfully created an admin account."
-        //     })  
-        // })
     },
 
 

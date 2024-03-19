@@ -23,11 +23,11 @@ const getOneAdmin = async(user_ID)=>{
  
 //register new user
 const registerAdmin = async(user_Name, user_Surname, user_Age, user_Gender, user_Email, user_Password, user_Role, user_Image)=>{
-    const [user] = 
+    // const [user] = 
     await pool.query(`
         INSERT INTO users (user_Name, user_Surname, user_Age, user_Gender, user_Email, user_Password, user_Role, user_Image) VALUES (?,?,?,?,?,?,?,?)
     `,[user_Name, user_Surname, user_Age, user_Gender, user_Email, user_Password, user_Role, user_Image])
-    return getOneAdmin(user.insertId)
+    // return getOneAdmin(user.insertId)
 }  
 
 //delete user
