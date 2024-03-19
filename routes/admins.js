@@ -11,7 +11,7 @@ router
         .post(controller.registerAdmin)
 
 router
-    .route('/:admin_ID')
+    .route('/:user_ID')
         .get(controller.getOneAdmin)
         .patch(controller.editAdmin) 
         .delete(controller.deleteAdmin) 

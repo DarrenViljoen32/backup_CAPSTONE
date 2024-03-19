@@ -9,14 +9,14 @@ import { checkAdmin } from '../models/database.js'
 
 
 const auth = async (req, res, next) => {
-    const {admin_Name, admin_Password} = req.body
-    const hashedPassword = await checkAdmin(admin_Name)
-    bcrypt.compare(admin_Password, hashedPassword, (err, result)=> {
+    const {user_Email, user_Password} = req.body
+    const hashedPassword = await checkAdmin(user_Email)
+    bcrypt.compare(user_Password, hashedPassword, (err, result)=> {
         if(err) throw err
         if(result === true){
-            const {admin_Name} = req.body
+            const {user_Email} = req.body
             const token = jwt.sign(
-                {admin_Name:admin_Name},
+                {user_Email:user_Email},
                 process.env.SECRET_KEY,
                 {expiresIn: '8h'}
             ) 
