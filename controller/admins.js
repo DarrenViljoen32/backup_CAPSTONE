@@ -29,7 +29,7 @@ export default{
         const {user_Name, user_Surname, user_Age, user_Gender, user_Email, user_Password, user_Role, user_Image} = req.body
         bcrypt.hash(user_Password, 10, async(err,hash)=>{
             if(err) throw err
-            await registerAdmin(user_Name, user_Surname, user_Age, user_Gender, user_Email, user_Password, user_Role, user_Image, hash)
+            await registerAdmin(user_Name, user_Surname, user_Age, user_Gender, user_Email, user_Role, user_Image, hash)
             res.send({
                 msg: "You have successfully created an admin account."
             })  
