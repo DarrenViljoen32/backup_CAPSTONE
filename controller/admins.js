@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt'
 import {getAdmins, getOneAdmin, registerAdmin, deleteAdmin, editAdmin, checkAdmin} from '../models/database.js'
 
-
+const saltRounds = 10
 export default{
     getAdmins: async (req,res)=>{
         try{
@@ -26,11 +26,11 @@ export default{
     },
 
     registerAdmin: async (req,res)=>{
-        const bcrypt = require('bcrypt');
-        const {user_Name, user_Surname, user_Age, user_Gender, user_Email, user_Password, user_Role, user_Image} = req.body
+        // const bcrypt = require('bcrypt');
         try{
-            const hashedPassword = await bcrypt.hash(user_Password, 10);
-            await registerAdmin(user_Name, user_Surname, user_Age, user_Gender, user_Email, hashedPassword, user_Role, user_Image)
+            const {user_Name, user_Surname, user_Age, user_Gender, user_Email, user_Password, user_Role, user_Image} = req.body
+            const hashedPassword = await bcrypt.hash(user_Password, saltRounds);
+            const post = await registerAdmin(user_Name, user_Surname, user_Age, user_Gender, user_Email, user_Role, user_Image, hashedPassword,)
             res.send({
                 msg: "You have successfully created an admin account."
             })
