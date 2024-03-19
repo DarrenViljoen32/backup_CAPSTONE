@@ -28,31 +28,31 @@ export default{
     registerAdmin: async (req,res)=>{
         // const bcrypt = require('bcrypt');
         const {user_Name, user_Surname, user_Age, user_Gender, user_Email, user_Password, user_Role, user_Image} = req.body
-        try{
-            const hashedPassword = await bcrypt.hash(user_Password, saltRounds);
-            await registerAdmin(user_Name, user_Surname, user_Age, user_Gender, user_Email, user_Role, user_Image, hashedPassword)
-            res.send(await getAdmins()
-                // {
-                // msg: "You have successfully created an admin account."
-                // }
-            )
-        }catch(error){
-            res.status(500).send({
-                error: "Internal Server Error."
-            })
-        }
-        // bcrypt.hash(user_Password, 10, async(err,hash)=>{
-        //     if(err) throw err
-        //     await registerAdmin(user_Name, user_Surname, user_Age, user_Gender, user_Email, user_Role, user_Image, hash)
-        //     res.send({
-        //         msg: "You have successfully created an admin account."
-        //     })  
-        // })
+        // try{
+        //     const hashedPassword = await bcrypt.hash(user_Password, saltRounds);
+        //     await registerAdmin(user_Name, user_Surname, user_Age, user_Gender, user_Email, user_Role, user_Image, hashedPassword)
+        //     res.send(await getAdmins()
+        //         // {
+        //         // msg: "You have successfully created an admin account."
+        //         // }
+        //     )
+        // }catch(error){
+        //     res.status(500).send({
+        //         error: "Internal Server Error!"
+        //     })
+        // }
+        bcrypt.hash(user_Password, 10, async(err,hash)=>{
+            if(err) throw err
+            await registerAdmin(user_Name, user_Surname, user_Age, user_Gender, user_Email, user_Role, user_Image, hash)
+            res.send({
+                msg: "You have successfully created an admin account."
+            })  
+        })
     },
 
 
     deleteAdmin: async (req,res)=>{
-        // await deleteAdmin(req.params.admin_ID)
+        // await deleteAdmin(req.params.user_ID)
         
         try{
             await deleteAdmin(req.params.user_ID)
