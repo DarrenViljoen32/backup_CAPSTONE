@@ -16,7 +16,7 @@ export default{
 
     getOneAdmin: async (req,res)=>{
         try{
-            res.send(await getOneAdmin(+req.params.admin_ID))
+            res.send(await getOneAdmin(+req.params.user_ID))
         }catch(err){
             console.error(err);
             res.json({
@@ -26,10 +26,10 @@ export default{
     },
 
     registerAdmin: async (req,res)=>{
-        const {admin_Name, admin_Email, admin_Password} = req.body
-        bcrypt.hash(admin_Password, 10, async(err,hash)=>{
+        const {user_Name, user_Surname, user_Age, user_Gender, user_Email, user_Password, user_Role, user_Image} = req.body
+        bcrypt.hash(user_Password, 10, async(err,hash)=>{
             if(err) throw err
-            await registerAdmin(admin_Name, admin_Email, hash)
+            await registerAdmin(user_Name, user_Surname, user_Age, user_Gender, user_Email, user_Password, user_Role, user_Image, hash)
             res.send({
                 msg: "You have successfully created an admin account."
             })  
@@ -41,8 +41,8 @@ export default{
         // await deleteAdmin(req.params.admin_ID)
         
         try{
-            await deleteAdmin(req.params.admin_ID)
-            console.log(req.params.admin_ID);
+            await deleteAdmin(req.params.user_ID)
+            console.log(req.params.user_ID);
             res.send({
                 msg: "You have successfully deleted the account."
             })
@@ -56,15 +56,20 @@ export default{
 
     editAdmin: async (req,res)=>{
         try{
-            const [admin] = await getOneAdmin(+req.params.admin_ID)
-            let {admin_Name, admin_Email, admin_Password} = req.body
+            const [user] = await getOneAdmin(+req.params.user_ID)
+            let {user_Name, user_Surname, user_Age, user_Gender, user_Email, user_Password, user_Role, user_Image} = req.body
     
-            admin_Name ? admin_Name = admin_Name: {admin_Name} = admin
-            admin_Email ? admin_Email = admin_Email: {admin_Email} = admin
-            admin_Password ? admin_Password = admin_Password: {admin_Password} = admin
+            user_Name ? user_Name = user_Name: {user_Name} = user
+            user_Surname ? user_Surname = user_Surname: {user_Surname} = user
+            user_Age ? user_Age = user_Age: {user_Age} = user
+            user_Gender ? user_Gender = user_Gender: {user_Gender} = user
+            user_Email ? user_Email = user_Email: {user_Email} = user
+            user_Password ? user_Password = user_Password: {user_Password} = user
+            user_Role ? user_Role = user_Role: {user_Role} = user
+            user_Image ? user_Image = user_Image: {user_Image} = user
     
-            console.log(admin);
-            await editAdmin(admin_Name, admin_Email, admin_Password, +req.params.admin_ID) 
+            console.log(user);
+            await editAdmin(user_Name, user_Surname, user_Age, user_Gender, user_Email, user_Password, user_Role, user_Image, +req.params.user_ID) 
             res.send({
                 msg: "You have successfully updated the data."
             })
