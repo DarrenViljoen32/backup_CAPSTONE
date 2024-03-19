@@ -12,6 +12,8 @@ export default createStore({
     users: null,
     admins: null,
     posts: null,
+    tags: null,
+
     loggedin: false,
     loginMessage: null,
   },
@@ -27,6 +29,10 @@ export default createStore({
     },
 
     setPosts(state, payload){
+      state.posts = payload
+    },
+
+    setTags(state, payload){
       state.posts = payload
     },
 
@@ -293,7 +299,83 @@ export default createStore({
         console.error('Error adding post ', err);
         Swal.fire('Error adding post ', err)
       }
-    }
+    },
+
+
+    //TAGS
+    //get all tags
+    async getTags({commit}){
+      try{
+        let tags = await axios.get(baseUrl + '/tags')
+        console.log(tags);
+        commit('setTags', tags.data)
+      }catch(error){
+        console.error('Error fetching tags', error);
+        Swal.fire('Error fetching tags', error)
+      }
+    },
+
+    //get one tag
+    async getOneTag({commit}, tagDetails){
+      try{
+        await axios.get(baseUrl + '/tags/', tagDetails)
+        window.location.reload()
+      }catch(err){
+        console.error('Error fetching a tag ', err);
+        Swal.fire('Error fetching a tag ', err)
+      }
+    },
+
+    //delete tag
+      async deleteTag({commit}, tag_ID){
+        try{
+          console.log(tag_ID);
+          let {data} = await axios.delete(baseUrl + '/tags/' + tag_ID) 
+          if(data.msg){
+            Swal.fire(data.msg)
+          }else{
+            Swal.fire("Successfully Deleted Tag.")
+          }
+            window.location.reload()
+          }catch(err){
+            console.error('Error deleting tag. ', err);
+            Swal.fire('Error deleting tag. ', err)
+          }
+        },
+    
+    //update tag
+    async editTag({commit}, update){
+      try{
+        let {data} = await axios.patch(baseUrl + '/tags/' + update.tag_ID, update)
+        if(data.msg){
+          Swal.fire(data.msg)          
+        }else{
+          Swal.fire("Successfully Updated Tag.")
+        }
+        window.location.reload()
+      }catch(err){
+        console.error('Error updating tag. ', err);
+        Swal.fire('Error updating tag. ', err)
+      }
+    },
+
+    //add Tag
+        async addTag({commit}, add){
+          try{
+            console.log(add);
+            let {data} = await axios.post(baseUrl + '/tags', add)
+            if(data.msg){
+              Swal.fire(data.msg)
+            }else{
+              Swal.fire("Successfully Added a Tag.")
+            }
+            window.location.reload()
+          }catch(err){
+            console.error('Error adding Tag. ', err);
+            Swal.fire('Error adding Tag. ', err)
+          }
+        },
+
   },
 
   modules: {

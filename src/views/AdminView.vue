@@ -28,6 +28,8 @@
                   <br><br>
                   <input type="password" name="user_Password" placeholder="Password" v-model="user_Password">
                   <br><br>
+                  <input type="text" name="user_Role" placeholder="Role" v-model="user_Role">
+                  <br><br>
                   <input type="text" name="user_Image" placeholder="Image Url" v-model="user_Image">
                   <br><br>
                 </div>
@@ -175,7 +177,7 @@
 
 
           <!-- USERS -->
-        <!-- <div v-if="loadingUsers">
+        <div v-if="loadingUsers">
 
           <div class="row">
             <div class="col-lg-6" id="subTitle">
@@ -197,6 +199,7 @@
                 <th>Gender</th>
                 <th>Email</th>
                 <th>Password</th>
+                <th>Role</th>
                 <th>Image</th>
                 <th>Edit</th>
                 <th>Delete</th>
@@ -211,6 +214,7 @@
                 <td>{{ user.user_Gender }}</td>
                 <td>{{ user.user_Email }}</td>
                 <td>{{ user.user_Password }}</td>
+                <td>{{ user.user_Role }}</td>
                 <td><img v-bind:src= "user.user_Image" alt="Profile Photo" class="img-fluid"></td>
                 <td>
                   <button class="bi bi-pencil" title="Edit User" @click="populateUserFields(user)" data-bs-toggle="modal" data-bs-target="#exampleModal4"></button>
@@ -226,15 +230,15 @@
 
         <div v-else>
           <Spinner/>
-        </div> -->
+        </div>
 
         
         <!-- ADMINS -->
-        <div v-if="loadingAdmins">
+        <!-- <div v-if="loadingAdmins">
           <div class="row">
 
             <div class="col-lg-6" id="subTitle">
-              <h2>Users</h2>
+              <h2>Admins</h2>
             </div>
 
             <div class="col-lg-6" id="crudIcons">
@@ -274,7 +278,7 @@
 
         <div v-else>
           <Spinner/>
-        </div>
+        </div> -->
 
 
         <!-- POSTS -->
@@ -344,10 +348,12 @@ export default{
             users: [],
             admins: [],
             posts: [],
+            tags: [],
 
             loadingUsers: true,
             loadingAdmins: true,
             loadingPosts: true,
+            loadingTags: true,
             
             user_ID: null,
             user_Name: null,
@@ -356,6 +362,7 @@ export default{
             user_Gender: null,
             user_Email: null,
             user_Password: null,
+            user_Role: null,
             user_Image: null,
             
             editedUsers: {
@@ -366,6 +373,7 @@ export default{
               user_Gender: null,
               user_Email: null,
               user_Password: null,
+              user_Role: null,
               user_Image: null,
             },
 
@@ -390,6 +398,14 @@ export default{
               post_Title: null,
               post_Content: null,
               user_ID: null
+            },
+
+            tag_ID: null,
+            tag_Name: null,
+
+            editedTags: {
+              tag_ID: null,
+              tag_Name: null,
             },
 
             modalVisable: false,
@@ -439,6 +455,7 @@ export default{
         this.user_Gender = user.user_Gender
         this.user_Email = user.user_Email
         this.user_Password = user.user_Password
+        this.user_Role = user.user_Role
         this.user_Image = user.user_Image
         this.editedUsers = {...user}
       },
@@ -450,6 +467,7 @@ export default{
         this.user_Gender = ''
         this.user_Email = ''
         this.user_Password = ''
+        this.user_Role = ''
         this.user_Image = ''
       },
  
@@ -464,6 +482,7 @@ export default{
                 user_Gender: null,
                 user_Email: null,
                 user_Password: null,
+                user_Role: null,
                 user_Image: null,
           }
         }catch(err){
@@ -584,6 +603,20 @@ export default{
         console.error(err);
       }
     },
+
+    async displayTags(){
+      try{
+        this.loadingTags = false
+        await this.$store.dispatch('getTags')
+        this.tags = this.$store.state.tags
+      }catch(err){
+        console.error(err);
+      }finally{
+        this.loadingTags = true
+      }
+    },
+
+    
 
   },
 

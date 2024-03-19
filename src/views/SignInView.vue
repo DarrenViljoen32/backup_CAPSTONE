@@ -35,10 +35,10 @@ export default{
             user_Surname: null,
             user_Age: null,
             user_Gender: null,
-            admin_Email: null,
-            admin_Password: null,
-            admin_Role: null,
-            admin_Image: null
+            user_Email: null,
+            user_Password: null,
+            user_Role: null,
+            user_Image: null
 
         }
     },

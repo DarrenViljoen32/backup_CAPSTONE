@@ -2,9 +2,9 @@
     <div class="view">
         <h1>Log In</h1>
 
-        <input type="text" name="admin_Name" id="admin_Name1" placeholder="Name" v-model="admin_Name">
+        <input type="text" name="user_Email" id="user_Email" placeholder="Email" v-model="user_Email">
         <br><br>
-        <input type="password" name="admin_Password" id="admin_Password1" placeholder="Password" v-model="admin_Password">'
+        <input type="password" name="user_Password" id="user_Password1" placeholder="Password" v-model="user_Password">'
         <br><br>
 
         <button @click="password()">LogIn</button>
@@ -19,9 +19,8 @@
 export default{
     data() {
         return{
-            admin_Name: null,
-            admin_Email: null,
-            admin_Password: null
+            user_Email: null,
+            user_Password: null
         }
     },
 
