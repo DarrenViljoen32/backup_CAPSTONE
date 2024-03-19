@@ -27,10 +27,10 @@ export default{
 
     registerAdmin: async (req,res)=>{
         // const bcrypt = require('bcrypt');
+        const {user_Name, user_Surname, user_Age, user_Gender, user_Email, user_Password, user_Role, user_Image} = req.body
         try{
-            const {user_Name, user_Surname, user_Age, user_Gender, user_Email, user_Password, user_Role, user_Image} = req.body
             const hashedPassword = await bcrypt.hash(user_Password, saltRounds);
-            const post = await registerAdmin(user_Name, user_Surname, user_Age, user_Gender, user_Email, user_Role, user_Image, hashedPassword)
+            await registerAdmin(user_Name, user_Surname, user_Age, user_Gender, user_Email, user_Role, user_Image, hashedPassword)
             res.send(await getAdmins()
                 // {
                 // msg: "You have successfully created an admin account."
