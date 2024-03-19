@@ -36,9 +36,8 @@ export default{
             //     msg: "You have successfully created an admin account."
             //     }
             // )
-            bcrypt.hash(user_Password, 10, async(err,hash)=>{
-                if(err) throw err
-                await registerAdmin(user_Name, user_Surname, user_Age, user_Gender, user_Email, user_Role, user_Image, hash)
+            bcrypt.hash(user_Password, 10, async(hash)=>{
+                await registerAdmin(user_Name, user_Surname, user_Age, user_Gender, user_Email, hash, user_Role, user_Image)
                 res.send({
                     msg: "You have successfully created an admin account."
                 })  
