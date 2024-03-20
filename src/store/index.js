@@ -33,7 +33,7 @@ export default createStore({
     },
 
     setTags(state, payload){
-      state.posts = payload
+      state.tags = payload
     },
 
     setLogged(state, payload){

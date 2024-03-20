@@ -400,6 +400,7 @@ export default{
             editedTags: {
               tag_ID: null,
               tag_Name: null,
+              post_ID: null
             },
 
             modalVisable: false,
@@ -652,10 +653,6 @@ export default{
       }
     },
 
-
-
-    
-
   },
 
     
@@ -667,6 +664,7 @@ export default{
     this.displayUsers()
     this.displayAdmins()
     this.displayPosts()
+    this.displayTags()
   }
 }
 </script>

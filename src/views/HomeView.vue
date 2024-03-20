@@ -47,7 +47,7 @@
                 <p id="postEmail">{{ getUserEmail(post.user_ID) }}</p>
                 <div class="postContent">
                   <p>{{ post.post_Content }}</p>
-                  <p id="postDetails">{{ post.post_Date }}</p>
+                  <p id="postDetails">{{new Date().getFullYear()}}</p>
                   <hr><br>
                 </div>
               </div>
