@@ -15,7 +15,7 @@ const getTags = async()=>{
 const getOneTag = async(tag_ID)=>{
     const [result] = await pool.query(`
         SELECT * 
-        FROM tagss
+        FROM tags
         WHERE tag_ID = ?
     `,[tag_ID])
     return result
@@ -24,7 +24,8 @@ const getOneTag = async(tag_ID)=>{
 //add tag
 const addTag = async(tag_Name, post_ID)=>{
     const [tag] = await pool.query(`
-        INSERT INTO tags (tag_Name, post_ID) VALUES (?,?)`,[tag_Name, post_ID])
+        INSERT INTO tags (tag_Name, post_ID) VALUES (?,?)
+    `,[tag_Name, post_ID])
     return getOnePost(tag.insertId)
 }
 
