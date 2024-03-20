@@ -196,7 +196,7 @@ export default createStore({
     //   }
     // },
 
-    //login as admin
+    //login as admin user
     async loginAdmin({commit}, user_Password){
         console.log(user_Password);
         let {data} = await axios.post(baseUrl + '/login', user_Password)
@@ -303,6 +303,7 @@ export default createStore({
 
 
     //TAGS
+    
     //get all tags
     async getTags({commit}){
       try{
@@ -360,21 +361,21 @@ export default createStore({
     },
 
     //add Tag
-        async addTag({commit}, add){
-          try{
-            console.log(add);
-            let {data} = await axios.post(baseUrl + '/tags', add)
-            if(data.msg){
-              Swal.fire(data.msg)
-            }else{
-              Swal.fire("Successfully Added a Tag.")
-            }
-            window.location.reload()
-          }catch(err){
-            console.error('Error adding Tag. ', err);
-            Swal.fire('Error adding Tag. ', err)
+      async addTag({commit}, add){
+        try{
+          console.log(add);
+          let {data} = await axios.post(baseUrl + '/tags', add)
+          if(data.msg){
+            Swal.fire(data.msg)
+          }else{
+            Swal.fire("Successfully Added a Tag.")
           }
-        },
+          window.location.reload()
+        }catch(err){
+          console.error('Error adding Tag. ', err);
+          Swal.fire('Error adding Tag. ', err)
+        }
+      },
 
   },
 

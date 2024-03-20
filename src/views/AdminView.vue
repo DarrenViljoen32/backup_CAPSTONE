@@ -62,6 +62,8 @@
                   <br><br>
                   <input type="password" name="user_Password" placeholder="Password" v-model="editedUsers.user_Password">
                   <br><br>
+                  <input type="text" name="user_Role" placeholder="Role" v-model="editedUsers.user_Role">
+                  <br><br>
                   <input type="text" name="user_Image" placeholder="Image Url" v-model="editedUsers.user_Image">
                   <br><br>
                 </div>
@@ -75,50 +77,46 @@
           
         
 
-          <!-- Add Admin Modal -->
+          <!-- Add Tag Modal -->
           <div class="modal fade" id="exampleModal6" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Add Admin</h5>
+                  <h5 class="modal-title" id="exampleModalLabel">Add Tag</h5>
                   <a class="btn-close" data-bs-dismiss="modal" aria-label="Close"></a>
                 </div>
                 <div class="modal-body">
-                  <input type="text" name="admin_Name" placeholder="Full Name" v-model="admin_Name">
+                  <input type="text" name="tag_Name" placeholder="Tag Name" v-model="tag_Name">
                   <br><br>
-                  <input type="email" name="admin_Email" placeholder="Email" v-model="admin_Email">
-                  <br><br>
-                  <input type="password" name="admin_Password" placeholder="Password" v-model="admin_Password">
+                  <input type="text" name="post_ID" placeholder="PostID" v-model="post_ID">
                   <br><br>
                 </div>
                 <div class="modal-footer">
                   <button type="button" data-bs-dismiss="modal">Close</button>
-                  <button type="button" @click="addAdmin">Add</button>
+                  <button type="button" @click="addTag">Add</button>
                 </div>
               </div>
             </div>
           </div>
 
 
-          <!-- Edit Admin Modal -->
-          <div class="modal fade" id="exampleModal8" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" v-for="admin in $store.state.admins" :key="admin.admin_ID">
+          <!-- Edit Tag Modal -->
+          <div class="modal fade" id="exampleModal8" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" v-for="tag in $store.state.tags" :key="tag.tag_ID">
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Edit Admin</h5>
+                  <h5 class="modal-title" id="exampleModalLabel">Edit Tag</h5>
                   <a class="btn-close" data-bs-dismiss="modal" aria-label="Close"></a>
                 </div>
                 <div class="modal-body">
-                  <input type="text" name="admin_Name" placeholder="Full Name" v-model="editedAdmins.admin_Name">
+                  <input type="text" name="tag_Name" placeholder="Tag Name" v-model="editedTags.tag_Name">
                   <br><br>
-                  <input type="email" name="admin_Email" placeholder="Email" v-model="editedAdmins.admin_Email">
-                  <br><br>
-                  <input type="password" name="admin_Password" placeholder="Password" v-model="editedAdmins.admin_Password">
+                  <input type="text" name="post_ID" placeholder="PostID" v-model="editedTags.post_ID">
                   <br><br>
                 </div>
                 <div class="modal-footer">
                   <button type="button" data-bs-dismiss="modal">Close</button>
-                  <button @click="adminEdit">Save</button>
+                  <button @click="tagEdit">Save</button>
                 </div>
               </div>
             </div>
@@ -233,53 +231,7 @@
         </div>
 
         
-        <!-- ADMINS -->
-        <!-- <div v-if="loadingAdmins">
-          <div class="row">
-
-            <div class="col-lg-6" id="subTitle">
-              <h2>Admins</h2>
-            </div>
-
-            <div class="col-lg-6" id="crudIcons">
-              <button data-bs-toggle="modal" data-bs-target="#exampleModal6" class="bi bi-plus-lg" title="Add Admin" @click="clearAdminInput"></button>Add User
-            </div>
-
-          </div>
-
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Password</th>
-                <th>Edit</th>
-                <th>Delete</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="admin in admins" :key="admin.admin_ID">
-                <th>{{ admin.admin_ID }}</th>
-                <td>{{ admin.admin_Name }}</td>
-                <td>{{ admin.admin_Email }}</td>
-                <td>{{ admin.admin_Password }}</td>
-                <td>
-                  <button class="bi bi-pencil" title="Edit Admin" @click="populateAdminFields(admin)" data-bs-toggle="modal" data-bs-target="#exampleModal8"></button>
-                </td>
-                <td>
-                <button class="bi bi-dash-lg" title="Delete Admin" @click="deleteAdmin(admin.admin_ID)"></button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-
-        </div>
-
-        <div v-else>
-          <Spinner/>
-        </div> -->
-
+        
 
         <!-- POSTS -->
         <div v-if="loadingPosts">
@@ -321,14 +273,56 @@
               </tr>
             </tbody>
           </table>
+          
+        </div>
+        
+        <div v-else>
+          <Spinner/>
+        </div>
+
+        <!-- TAGS -->
+        <div v-if="loadingTags">
+          <div class="row">
+
+            <div class="col-lg-6" id="subTitle">
+              <h2>Tags</h2>
+            </div>
+
+            <div class="col-lg-6" id="crudIcons">
+              <button data-bs-toggle="modal" data-bs-target="#exampleModal6" class="bi bi-plus-lg" title="Add Tag" @click="clearTagInput"></button>Add Tag
+            </div>
+
+          </div>
+
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Edit</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="tag in tags" :key="tag.tag_ID">
+                <th>{{ tag.tag_ID }}</th>
+                <td>{{ tag.tag_Name }}</td>
+                <td>
+                  <button class="bi bi-pencil" title="Edit Tag" @click="populateTagFields(tag)" data-bs-toggle="modal" data-bs-target="#exampleModal8"></button>
+                </td>
+                <td>
+                <button class="bi bi-dash-lg" title="Delete Tag" @click="deleteTag(tag.tag_ID)"></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
 
         </div>
 
         <div v-else>
           <Spinner/>
         </div>
-
-
+        
 
     </div>
 </template>
@@ -604,6 +598,9 @@ export default{
       }
     },
 
+
+    //TAGS
+
     async displayTags(){
       try{
         this.loadingTags = false
@@ -615,6 +612,47 @@ export default{
         this.loadingTags = true
       }
     },
+
+    deleteTag(tag_ID){
+      try{
+        this.$store.dispatch('deleteTag', tag_ID)
+      }catch(err){
+        console.error(err);
+      }
+    },
+
+    addTag(){
+      try{
+        this.$store.dispatch('addTag', this.$data)
+      }catch(err){
+        console.error(err);
+      }
+    },
+
+    populateTagFields(tag){
+      this.tag_Name = tag.tag_Name
+      this.post_ID = tag.post_ID
+      this.editedTags = {...tag}
+    },
+
+    clearTagInput(){
+      this.tag_Name = ''
+      this.post_ID = ''
+    },
+
+    tagEdit(){
+      try{
+        this.$store.dispatch('editTag', this.editedTags)
+        this.editedTags = {
+          tag_Name : null,
+          post_ID : null
+        }
+      }catch(err){
+        console.error(err);
+      }
+    },
+
+
 
     
 
