@@ -198,7 +198,7 @@ export default createStore({
 
     //login as admin user
     async loginAdmin({commit}, user_Password){
-        console.log(user_Password);
+        // console.log(user_Password);
         let {data} = await axios.post(baseUrl + '/login', user_Password)
 
         const userDetails = data.users

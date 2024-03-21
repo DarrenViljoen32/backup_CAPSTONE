@@ -1,17 +1,44 @@
 <template>
     <div class="view">
-        <h1>Log In</h1>
 
-        <input type="text" name="user_Email" id="user_Email" placeholder="Email" v-model="user_Email">
-        <br><br>
-        <input type="password" name="user_Password" id="user_Password1" placeholder="Password" v-model="user_Password">'
-        <br><br>
+        <div class="row">
+            <div class="col-1"></div>
+            <div class="col-6" id="formBackground">
+                <br><br>
+                <h1>Log In</h1>
+                <br><br>
+        
+                <form>
+                    <div class="row">
+                        <div class="col" id="loginform">
+                            <input type="email" class="form-control"  name="user_Email" id="user_Email" placeholder="Email" v-model="user_Email" aria-describedby="emailHelp">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col" id="loginform">
+                            <input type="password" class="form-control" name="user_Password" id="user_Password1" placeholder="Password" v-model="user_Password" aria-describedby="emailHelp">
+                        </div>
+                    </div>
+                    <br>
+                    <button type="button" class="btn btn-primary" id="loginbutton" @click="password()">Log In</button>
+                </form>
+        
+                <!-- <input type="email" name="user_Email" id="user_Email" placeholder="Email" v-model="user_Email">
+                <br><br>
+                <input type="password" name="user_Password" id="user_Password1" placeholder="Password" v-model="user_Password">'
+                <br><br>
+        
+                <button @click="password()">LogIn</button> -->
+                <br><br><br>
+            </div>
+            <div class="col-4">
+                <p>Don't have an Account?</p>
+                <router-link to="/signin"><button class="btn btn-primary" id="signinbutton">Sign Up</button></router-link>
+            </div>
+            <div class="col-1"></div>
+        </div>
 
-        <button @click="password()">LogIn</button>
-        <br><br><br>
-
-        <p>Dont have an account?</p>
-        <router-link to="/signin"><button>Sign Up</button></router-link>
     </div>
 </template> 
 
@@ -36,8 +63,18 @@ export default{
 }
 </script>
 
-<style>
+<style scoped>
+
+#loginform{
+    margin-left: auto;
+}
+#loginbutton{
+    margin-left: auto;
+}
 button{
     margin: 5px;
+}
+#formBackground{
+    border: solid 2px black;
 }
 </style>

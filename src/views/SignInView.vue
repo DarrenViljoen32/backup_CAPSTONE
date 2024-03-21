@@ -1,29 +1,97 @@
 <template>
     <div class="view">
-        <h1>Sign Up</h1>
-        <input type="text" name="user_Name" id="user_Name2" placeholder="Name" v-model="user_Name">
-        <br><br>
-        <input type="text" name="user_Surname" id="user_Surname2" placeholder="Surname" v-model="user_Surname">
-        <br><br>
-        <input type="text" name="user_Age" id="user_Age" placeholder="Age" v-model="user_Age">
-        <br><br>
-        <input type="text" name="user_Gender" id="user_Gender" placeholder="Gender" v-model="user_Gender">
-        <br><br>
-        <input type="text" name="user_Email" id="user_Email" placeholder="Email" v-model="user_Email">
-        <br><br>
-        <input type="password" name="user_Password" id="user_Password2" placeholder="Password" v-model="user_Password">
-        <br><br>
-        <input type="text" name="user_Role" id="user_Role" placeholder="Role" v-model="user_Role">
-        <br><br>
-        <input type="text" name="user_Image" id="user_Image" placeholder="Image Url" v-model="user_Image">
-        <br><br>
-        
-        <router-link to="/login"><button @click="plusAdmin()">Register</button></router-link>
-        
-        <br><br><br>
 
-        <p>Already have an account?</p>
-        <router-link to="/login"><button>Log In</button></router-link>
+        <div class="row">
+            <div class="col-1"></div>
+            <div class="col-6" id="formBackground">
+                <br><br>
+                <h1>Sign Up</h1>
+                <br><br>
+
+                <form>
+                    <div class="row">
+                        <div class="col" id="signinform">
+                            <input type="text" class="form-control"  name="user_Name" id="user_Name" placeholder="Name" v-model="user_Name" aria-describedby="textHelp">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col" id="signinform">
+                            <input type="text" class="form-control"  name="user_Surname" id="user_Surname" placeholder="Surname" v-model="user_Surname" aria-describedby="nameHelp">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col" id="signinform">
+                            <input type="text" class="form-control"  name="user_Age" id="user_Age" placeholder="Age" v-model="user_Age" aria-describedby="textHelp">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col" id="signinform">
+                            <input type="text" class="form-control"  name="user_Gender" id="user_Gender" placeholder="Gender" v-model="user_Gender" aria-describedby="textHelp">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col" id="signinform">
+                            <input type="email" class="form-control"  name="user_Email" id="user_Email" placeholder="Email" v-model="user_Email" aria-describedby="emailHelp">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col" id="signinform">
+                            <input type="password" class="form-control" name="user_Password" id="user_Password" placeholder="Password" v-model="user_Password" aria-describedby="emailHelp">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col" id="signinform">
+                            <input type="text" class="form-control" name="user_Role" id="user_Role" placeholder="Role" v-model="user_Role" aria-describedby="emailHelp">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col" id="signinform">
+                            <input type="text" class="form-control" name="user_Image" id="user_Image" placeholder="Image" v-model="user_Image" aria-describedby="emailHelp">
+                        </div>
+                    </div>
+                    <br>
+                    
+                    <router-link to="/login"><button type="button" class="btn btn-primary" @click="plusAdmin()">Register</button></router-link>
+                </form>
+                
+                <!-- <input type="text" name="user_Name" id="user_Name2" placeholder="Name" v-model="user_Name">
+                    <br><br>
+                    <input type="text" name="user_Surname" id="user_Surname2" placeholder="Surname" v-model="user_Surname">
+                    <br><br>
+                    <input type="text" name="user_Age" id="user_Age" placeholder="Age" v-model="user_Age">
+                    <br><br>
+                    <input type="text" name="user_Gender" id="user_Gender" placeholder="Gender" v-model="user_Gender">
+                    <br><br>
+                    <input type="email" name="user_Email" id="user_Email" placeholder="Email" v-model="user_Email">
+                    <br><br>
+                    <input type="password" name="user_Password" id="user_Password2" placeholder="Password" v-model="user_Password">
+                    <br><br>
+                    <input type="text" name="user_Role" id="user_Role" placeholder="Role" v-model="user_Role">
+                    <br><br>
+                    <input type="text" name="user_Image" id="user_Image" placeholder="Image Url" v-model="user_Image">
+                    <br><br> -->
+                    
+                    <br><br><br>
+                    
+            </div>
+
+            <div class="col-4">
+                <p>Already have an Account?</p>
+                <router-link to="/login"><button type="button" class="btn btn-primary">Log In</button></router-link>
+            </div>
+            
+            <div class="col-1"></div>
+
+         </div>
+         <br><br>
+            
     </div>
 </template> 
 
@@ -55,7 +123,14 @@ export default{
 }
 </script>
 
-<style>
+<style scoped>
+
+#signinform{
+    margin-left: auto;
+}
+#formBackground{
+    border: solid 2px black;
+}
 button{
     margin: 5px;
 }
