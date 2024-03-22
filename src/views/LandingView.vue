@@ -1,29 +1,29 @@
 <template>
-    <div class="landing">
-
-        <!-- Backgroung Animations -->
-        <div class="square">  
-
-            <div class="square-title"></div>
-            <div class="shape"></div>
-            <div class="shape"></div>
-            <div class="shape"></div>
-            <div class="shape"></div>
-            <div class="shape"></div>
-            <div class="shape"></div>
+  <h3 class="rainbow_text animated">Welcome To The Future!</h3>
+  <div class="landing">
+    <!-- Backgroung Animations -->
+    <div class="square">  
+      
+      <div class="square-title"></div>
+      <div class="shape"></div>
+      <div class="shape"></div>
+      <div class="shape"></div>
+      <div class="shape"></div>
+      <div class="shape"></div>
+      <div class="shape"></div>
+      <br><br><br>
+      <br><br><br>
+      <h1>UNBOUND</h1>
+      <br>
+      <h4>Social Media Platform</h4>
+      <br><br><br>
+      
+      <router-link to="/signin"><button class="btn btn-primary">Sign Up</button></router-link>
+      <router-link to="/login"><button class="btn btn-primary">Log In</button></router-link>
+      <br><br><br>
             
-            <br><br><br>
-            <br><br><br>
-            <h1>UNBOUND</h1>
-            <br>
-            <h4>Social Media Platform</h4>
-            <br><br><br>
-            
-            <router-link to="/signin"><button class="btn btn-primary">Sign Up</button></router-link>
-            <router-link to="/login"><button class="btn btn-primary">Log In</button></router-link>
-            <br><br><br>
-        </div>
     </div>
+  </div>
 </template>
 
 <script>
@@ -36,12 +36,21 @@ export default{
 </script>
 
 <style scoped>
+template{
+  background-color: #6400C7;
+}
 .landing{
     margin-top: 0%;
     padding-top: 0%;
+    height: 100%;
+    background-color: #6400C7;
 }
 h1, h4{
     color: white;
+}
+h3{
+  margin-top: 0%;
+  background-color: #6400C7;
 }
 button{
     margin-left: 50px;

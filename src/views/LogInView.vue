@@ -5,19 +5,20 @@
             <div class="col-1"></div>
             <div class="col-6" id="formBackground">
                 <br><br>
-                <h1>Log In</h1>
+                <h1 id="loginTitle">Log In</h1>
                 <br><br>
         
                 <form>
                     <div class="row">
                         <div class="col" id="loginform">
                             <input type="email" class="form-control"  name="user_Email" id="user_Email" placeholder="Email" v-model="user_Email" aria-describedby="emailHelp">
+                            <p id="formLabel">Email Address</p>
                         </div>
                     </div>
-                    <br>
                     <div class="row">
                         <div class="col" id="loginform">
                             <input type="password" class="form-control" name="user_Password" id="user_Password1" placeholder="Password" v-model="user_Password" aria-describedby="emailHelp">
+                            <p id="formLabel">Email Address</p>
                         </div>
                     </div>
                     <br>
@@ -68,6 +69,12 @@ export default{
 #loginform{
     margin-left: auto;
 }
+#loginTitle{
+    color: white;
+}
+#formLabel{
+    color: rgb(153, 153, 153);
+}
 #loginbutton{
     margin-left: auto;
 }
@@ -76,5 +83,8 @@ button{
 }
 #formBackground{
     border: solid 2px black;
+    border-radius: 25px;
+    background-color: #6400C7;
+    box-shadow: 1px 1px 10px 1px black;
 }
 </style>
