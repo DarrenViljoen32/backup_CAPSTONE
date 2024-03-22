@@ -75,6 +75,9 @@ export default createStore({
       }
     },
 
+    //get user details
+    
+
     //delete user
     async deleteUser({commit}, user_ID){
       try{

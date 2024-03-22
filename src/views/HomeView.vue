@@ -83,6 +83,13 @@
       <Spinner/>
     </div>
 
+    <div v-if="userDetails">
+      <h1>{{ userDetails.user_Name }}</h1>
+    </div>
+    <div v-else>
+      <p>loading user details...</p>
+    </div>
+
   </div>
 </template>
 
@@ -97,6 +104,7 @@ export default {
     return{
       posts: [],
       users: [],
+      userDetails: null,
 
       loadingPosts : true,
       loadingUsers : true,
@@ -129,7 +137,7 @@ export default {
 
   created() {
     // Fetch user details from local storage or Vuex store
-    this.users = JSON.parse(localStorage.getItem('user'));
+    this.fetchUserDetails();
   },
 
   methods:{
@@ -159,19 +167,19 @@ export default {
       }
     },
 
-    deletePost(post_ID){
+    async deletePost(post_ID){
       try{
-        this.$store.dispatch('deletePost', post_ID)
+        await this.$store.dispatch('deletePost', post_ID)
       }catch(err){
         console.error(err);
       }
     },
 
-    addPost(){
+    async addPost(){
       try{
         const postContent = this.post_Content.trim()
         if(postContent){
-          this.$store.dispatch('addPost', {post_Content: postContent})
+          await this.$store.dispatch('addPost', {post_Content: postContent})
             .then(() => {
               this.post_Content = ''
             })
@@ -199,9 +207,9 @@ export default {
       this.post_Date = ''
     },
 
-    postEdit(){
+    async postEdit(){
       try{
-        this.$store.dispatch('editPost', this.editedPosts);
+        await this.$store.dispatch('editPost', this.editedPosts);
         this.editedPosts = {
           post_ID: null,
           post_Title: null,
@@ -241,6 +249,16 @@ export default {
       const user = this.users.find(user => user.user_ID === userid)
       return user ? user.user_Email: 'Unknown'
     },
+
+    async fetchUserDetails(){
+      try{
+        const response = await axios.get('/userDetails')
+
+        this.userDetails = response.data.userDetails
+      }catch(error){
+        console.error('Error fetching user details: ', error);
+      }
+    }
 
   },
 
