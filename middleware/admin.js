@@ -12,7 +12,11 @@ const auth = async (req, res, next) => {
     const {user_Email, user_Password} = req.body
     const hashedPassword = await checkAdmin(user_Email)
     bcrypt.compare(user_Password, hashedPassword, (err, result)=> {
-        if(err) throw err
+        if(err){
+            return res.status(500).json({
+                error: "Internal Server Error."
+            })
+        }
         if(result === true){
             const {user_Email} = req.body
             const token = jwt.sign(
