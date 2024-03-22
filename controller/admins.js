@@ -1,5 +1,4 @@
 import bcrypt from 'bcrypt'
-import jwt from 'jsonwebtoken'
 import {getAdmins, getOneAdmin, registerAdmin, deleteAdmin, editAdmin, checkAdmin} from '../models/database.js'
 
 const saltRounds = 10
@@ -98,19 +97,5 @@ export default{
         }
 
     },
-
-    getLoggedInUserDetails: async (req, res)=>{
-        try{
-            const decodedToken = jwt.verify(req.headers.authorization.split(' ')[1], process.env.SECRET_KEY)
-            const user_ID = decodedToken.user_ID
-
-            const userDetails = await getOneAdmin(user_ID)
-
-            res.json({userDetails})
-        }catch(error){
-            console.error('Error fetching user details', error);
-            res.status(500).json({error: 'Internal server error'})
-        }
-    }
 
 }
