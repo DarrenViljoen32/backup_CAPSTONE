@@ -9,6 +9,7 @@ import bcrypt from 'bcrypt'
 import adminRouter from './routes/admins.js'
 import postRouter from './routes/posts.js'
 import tagRouter from './routes/tags.js'
+import userDetailsRouter from './routes/userDetails.js'
 
 // import { registerAdmin, checkAdmin } from './models/database.js'
 import {auth} from './middleware/admin.js'
@@ -38,6 +39,7 @@ app.use(express.static('../frontend/src/views/LogInView.vue'))
 app.use('/admins', adminRouter)
 app.use('/posts', postRouter)
 app.use('/tags', tagRouter)
+app.use('/userDetails', userDetailsRouter)
 
 
 app.post('/login', auth, (req,res)=>{
