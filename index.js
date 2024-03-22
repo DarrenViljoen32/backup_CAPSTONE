@@ -21,10 +21,10 @@ const PORT = process.env.PORT
 const app = express();
     
 app.use(cors(
-    // {
-    // origin: 'http://localhost:8080',
-    // credentials: true
-    // }
+    {
+    origin: 'http://localhost:8080',
+    credentials: true
+    }
 )); 
 
 app.use(express.json());
