@@ -125,7 +125,14 @@ export default{
 </script>
 
 <style scoped>
-
+*{
+  overflow-x: hidden;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+*::-webkit-scrollbar{
+  display: none;
+}
 #signinform{
     margin-left: auto;
 }

@@ -244,7 +244,7 @@ export default createStore({
     async getOnePost({commit}, postDetails){
       try{
         await axios.get(baseUrl + '/posts/', postDetails)
-        window.location.reload()
+        // window.location.reload()
       }catch(err){
         console.error('Error fetching a user ', err);
         Swal.fire('Error fetching a user ', err)

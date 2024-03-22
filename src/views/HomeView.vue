@@ -1,21 +1,34 @@
 <template>
   <div class="home">
-    <router-link to="/"><button v-if="$cookies.get('jwt')" @click="logout">Log Out</button></router-link>
-    <br><br>
-    <h1>Home</h1>
-    <br><hr><br><br>
-    
+
+    <div class="row" id="banner">
+      <div class="col-1"></div>
+      <div class="col-7">
+        <h1>Home</h1>
+        <br><br>
+      </div>
+
+      <div class="col">
+        <router-link to="/"><button v-if="$cookies.get('jwt')" @click="logout" class="btn btn-primary" id="logoutButton">Log Out</button></router-link>
+      </div>
+      <div class="col-1"></div>
+      <br><hr><br><br>  
+    </div>
+
     <div v-if="loadingPosts">
 
       <div class="row">
-        <div class="col-lg-3" id="divider">
+        <div class="col-1"></div>
+        <div class="col-lg" id="divider">
 
           <h3 id="sortfilter">Make A Post</h3>
           <br>
           <form >
+            <input type="text" name="post_Title" id="postInput" class="form-control" placeholder="Post Title" v-model="post_Title">
+            <br>
             <textarea type="text" name="post_Content" id="postInput" class="form-control" placeholder="Type your post here!" v-model="post_Content"></textarea>
             <br>
-            <button type="button" @click="addPost">Post</button>
+            <button type="button" @click="addPost" class="btn btn-primary">Post</button>
           </form>
           <br><br><br>
 
@@ -28,13 +41,16 @@
           </form>
             <!-- <button>Search <span class="bi bi-search"></span></button>
             <br><br> -->
-            <button>Sort By Date <span class="bi bi-filter"></span></button>
+            <button class="btn btn-primary">Sort By Date <span class="bi bi-filter"></span></button>
             <br><br>
-            <button>Sort By Name <span class="bi bi-filter"></span></button>
+            <button class="btn btn-primary">Sort By Name <span class="bi bi-filter"></span></button>
             <br><br>
 
         </div>
-        <div class="col-lg-9">
+
+        <div class="col-1"></div>
+
+        <div class="col-lg-7">
           <h3>Posts</h3>
           <br><br>
 
@@ -43,9 +59,11 @@
 
             <div class="row">
               <div class="col-lg-12" id="postBlock" v-for="post in posts" :key="post.post_ID">
+                <p>{{ users.user_Email }}</p>
                 <h5 id="postDetails">{{getUsername(post.user_ID)}} {{ getUsersurname(post.user_ID) }}</h5>
                 <p id="postEmail">{{ getUserEmail(post.user_ID) }}</p>
                 <div class="postContent">
+                  <p id="postTitle">{{ post.post_Title }}</p>
                   <p>{{ post.post_Content }}</p>
                   <p id="postDetails">{{new Date().getFullYear()}}</p>
                   <hr><br>
@@ -57,7 +75,6 @@
 
           
         </div>
-
       </div>
 
     </div>
@@ -107,7 +124,12 @@ export default {
       sortOrder: '',
 
       modalVisable: false
-    }
+    };
+  },
+
+  created() {
+    // Fetch user details from local storage or Vuex store
+    this.users = JSON.parse(localStorage.getItem('user'));
   },
 
   methods:{
@@ -126,6 +148,14 @@ export default {
         console.error(err);
       }finally{
         this.loadingPosts = true
+      }
+    },
+
+    async displayOnePost(){
+      try{
+        await this.$store.dispatch('getOnePost')
+      }catch(eer){
+        console.error(err);
       }
     },
 
@@ -236,21 +266,23 @@ h1{
   margin-left: 5px;
 }
 h3{
-  text-align: center;
+  text-align: left;
 }
 #sortfilter{
   color: white;
 }
 #divider{
-  border-right: 3px solid;
-  background-color: #6400C7;
+  border: solid 3px black;
+    border-radius: 25px;
+    background-color: #6400C7;
+    box-shadow: 1px 1px 10px 1px black;
 }
 #filterUsers{
   margin-right: 10px;
   margin-left: 50px;
   width: 75%;
 }
-#postInput{
+#postTextbox{
   margin-right: 10px;
   margin-left: 50px;
   width: 70%;
@@ -263,7 +295,13 @@ h3{
 #postDetails{
   font-weight: bold;
 }
+#postTitle{
+  font-weight: bold;
+}
 #postEmail{
   font-style: italic;
+}
+span{
+  color: white;
 }
 </style>
