@@ -22,7 +22,7 @@ const app = express();
     
 app.use(cors(
     {
-    origin: 'http://localhost:8080',
+    origin: 'https://capstoneproject-fdda5.web.app',
     credentials: true
     }
 )); 
