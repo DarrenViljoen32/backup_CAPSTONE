@@ -45,12 +45,12 @@
                             <p id="formLabel">A Strong Password is Reccommended</p>
                         </div>
                     </div>
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="col" id="signinform">
-                            <input type="text" class="form-control" name="user_Role" id="user_Role" placeholder="Role" v-model="user_Role" aria-describedby="emailHelp">
+                            <input type="text" class="form-control" name="user_Role" id="user_Role" placeholder="Role" v-model="user_Role" aria-describedby="emailHelp" value="User" >
                             <p id="formLabel">Role: Admin / User</p>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="row">
                         <div class="col" id="signinform">
                             <input type="text" class="form-control" name="user_Image" id="user_Image" placeholder="Image" v-model="user_Image" aria-describedby="emailHelp">
@@ -106,7 +106,7 @@ export default{
             user_Gender: null,
             user_Email: null,
             user_Password: null,
-            user_Role: null,
+            user_Role: "User",
             user_Image: null
 
         }

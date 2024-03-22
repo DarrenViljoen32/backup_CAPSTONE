@@ -1,5 +1,5 @@
 <template>
-  <h3 class="rainbow_text animated">Welcome To The Future!</h3>
+  <h3 class="rainbow_text animated">Welcome!</h3>
   <div class="landing">
     <!-- Backgroung Animations -->
     <div class="square">  

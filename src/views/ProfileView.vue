@@ -1,55 +1,84 @@
 <template>
     <div class="view">
-        <router-link to="/"><button v-if="$cookies.get('jwt')" @click="logout">Log Out</button></router-link>
-        <br><br>
-        <h1>Profile</h1>
-        <br><br>
 
-          <!-- Edit Admin Modal -->
-          <div class="modal fade" id="exampleModal8" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" v-for="admin in $store.state.admins" :key="admin.admin_ID">
+      <div class="row">
+        <div class="col-1"></div>
+        <div class="col-7">
+          <h1>Profile</h1>
+          <br><br>
+        </div>
+        <div class="col">
+          <router-link to="/"><button v-if="$cookies.get('jwt')" @click="logout" class="btn btn-primary">Log Out</button></router-link>
+          <br><br>
+        </div>
+        <div class="col-1"></div>
+      </div>
+
+
+          <!-- Edit Users Modal -->
+          <div class="modal fade" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" v-for="user in $store.state.users" :key="user.user_ID">
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Edit Admin</h5>
+                  <h5 class="modal-title" id="exampleModalLabel">Edit User</h5>
                   <a class="btn-close" data-bs-dismiss="modal" aria-label="Close"></a>
                 </div>
                 <div class="modal-body">
-                  <input type="text" name="admin_Name" placeholder="Full Name" v-model="editedAdmins.admin_Name">
+                  <input type="text" name="user_Name" placeholder="First Name" v-model="editedUsers.user_Name">
                   <br><br>
-                  <input type="email" name="admin_Email" placeholder="Email" v-model="editedAdmins.admin_Email">
+                  <input type="text" name="user_Surname" placeholder="Surname" v-model="editedUsers.user_Surname">
                   <br><br>
-                  <input type="password" name="admin_Password" placeholder="Password" v-model="editedAdmins.admin_Password">
+                  <input type="text" name="user_Age" placeholder="Age" v-model="editedUsers.user_Age">
+                  <br><br>
+                  <input type="text" name="user_Gender" placeholder="Gender" v-model="editedUsers.user_Gender">
+                  <br><br>
+                  <input type="email" name="user_Email" placeholder="Email" v-model="editedUsers.user_Email">
+                  <br><br>
+                  <input type="password" name="user_Password" placeholder="Password" v-model="editedUsers.user_Password">
+                  <br><br>
+                  <input type="text" name="user_Role" placeholder="Role" v-model="editedUsers.user_Role">
+                  <br><br>
+                  <input type="text" name="user_Image" placeholder="Image Url" v-model="editedUsers.user_Image">
                   <br><br>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" data-bs-dismiss="modal">Close</button>
-                  <button @click="adminEdit">Save</button>
+                  <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Close</button>
+                  <button @click="userEdit" class="btn btn-primary">Save</button>
                 </div>
               </div>
             </div>
           </div>
 
-        <div v-if="loggedInAdmin">
+        <div v-if="loggedInUser">
           <table class="table table-striped">
             <thead>
               <tr>
                 <th>ID</th>
                 <th>Name</th>
+                <th>Surname</th>
+                <th>Age</th>
+                <th>Gender</th>
                 <th>Email</th>
                 <th>Password</th>
-                <th></th>
+                <th>Role</th>
+                <th>Image</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th>{{ loggedInAdmin.admin_ID }}</th>
-                <td>{{ loggedInAdmin.admin_Name }}</td>
-                <td>{{ loggedInAdmin.admin_Email }}</td>
-                <td>{{ loggedInAdmin.admin_Password }}</td>
+              <tr v-for="user in users" :key="user.user_ID">
+                <th>{{ user.user_ID }}</th>
+                <td>{{ user.user_Name }}</td>
+                <td>{{ user.user_Surname }}</td>
+                <td>{{ user.user_Age }}</td>
+                <td>{{ user.user_Gender }}</td>
+                <td>{{ user.user_Email }}</td>
+                <td>{{ user.user_Password }}</td>
+                <td>{{ user.user_Role }}</td>
+                <td>{{ user.user_Image }}</td>
                 <td>
-                  <button class="bi bi-pencil" title="Edit Admin" @click="populateAdminFields(admin)" data-bs-toggle="modal" data-bs-target="#exampleModal8"></button>
+                  <button class="bi bi-pencil" title="Edit Admin" @click="populateUserFields(user)" data-bs-toggle="modal" data-bs-target="#exampleModal8"></button>
                   <br><br>
-                  <button class="bi bi-dash-lg" title="Delete Admin" @click="deleteAdmin(admin.admin_ID)"></button>
+                  <button class="bi bi-dash-lg" title="Delete Admin" @click="deleteUser(user.user_ID)"></button>
                 </td>
               </tr>
             </tbody>
@@ -57,7 +86,6 @@
         </div>
 
         <div v-else>
-          <p>No logged in Admin</p>
           <Spinner/>
         </div>
 
@@ -75,19 +103,29 @@ export default{
     data(){
         return{
             admins: [],
+            users: [],
 
-            loadingAdmins: true,
+            loadingUsers: true,
 
-            admin_ID: null,
-            admin_Name: null,
-            admin_Email: null,
-            admin_Password: null,
+
+            user_ID: null,
+            user_Name: null,
+            user_Age: null,
+            user_Gender: null,
+            user_Email: null,
+            user_Password: null,
+            user_Role: null,
+            user_Image: null,
 
             editedAdmins: {
-              admin_ID: null,
-              admin_Name: null,
-              admin_Email: null,
-              admin_Password: null,
+              user_ID: null,
+              user_Name: null,
+              user_Age: null,
+              user_Gender: null,
+              user_Email: null,
+              user_Password: null,
+              user_Role: null,
+              user_Image: null,
             },
 
             modalVisable: false,
@@ -99,77 +137,94 @@ export default{
     },
 
     loggedInAdmin(){
-      return this.$store.state.admins
+      return this.$store.state.users
     }
   },
 
   methods: {
-    // async displayAdmins(){
-    //   try{
-    //     this.loadingAdmins = false
-    //     await this.$store.dispatch('getAdmins')
-    //     this.admins = this.$store.state.admins
-    //   }catch(err){
-    //     console.error(err);
-    //   }finally{
-    //     this.loadingAdmins = true
-    //   }
-    // },
+      //USERS
 
-    async displayOneAdmin(){
-      try{
-        this.loadingAdmins = false
-        await this.$store.dispatch('getOneAdmin')
-        this.admins = this.$store.state.admins
-      }catch(err){
-        console.error(err);
-      }finally{
-        this.loadingAdmins = true
-      }
-    },
-
-    deleteAdmin(admin_ID){
-      try{
-        this.$store.dispatch('deleteAdmin', admin_ID)
-      }catch(err){
-        console.error(err);
-      }
-    },
-
-    populateAdminFields(admin){
-      this.admin_Name = admin.admin_Name
-      this.admin_Email = admin.admin_Email
-      this.admin_Password = admin.admin_Password
-      this.editedAdmins = {...admin}
-    },
-
-    clearAdminInput(){
-      this.admin_Name = ''
-      this.admin_Email = ''
-      this.admin_Password = ''
-    },
-
-    adminEdit(){
-      try{
-        this.$store.dispatch('editAdmins', this.editedAdmins)
-        this.editedAdmins = {
-          admin_Name : null,
-          admin_Email : null,
-          admin_Password : null
+      async displayUsers(){
+        try{
+          this.loadingUsers = false
+          await this.$store.dispatch('getUsers')
+          this.users = this.$store.state.users
+        }catch(err){
+          console.error(err);
+        }finally{
+          this.loadingUsers = true
         }
-      }catch(err){
-        console.error(err);
-      }
+      },
+
+      deleteUser(user_ID){
+        try{
+          this.$store.dispatch('deleteUser', user_ID)
+        }catch(err){
+          console.error(err);
+        }
+      },
+
+      addUser(){
+        try{
+          this.$store.dispatch('addUser', this.$data)
+        }catch(err){
+          console.error(err);
+        }
+      },
+
+      populateUserFields(user){
+        this.user_Name = user.user_Name
+        this.user_Surname = user.user_Surname
+        this.user_Age = user.user_Age
+        this.user_Gender = user.user_Gender
+        this.user_Email = user.user_Email
+        this.user_Password = user.user_Password
+        this.user_Role = user.user_Role
+        this.user_Image = user.user_Image
+        this.editedUsers = {...user}
+      },
+
+      clearInput(){
+        this.user_Name = ''
+        this.user_Surname = ''
+        this.user_Age = ''
+        this.user_Gender = ''
+        this.user_Email = ''
+        this.user_Password = ''
+        this.user_Role = ''
+        this.user_Image = ''
+      },
+ 
+      userEdit(){
+        try{
+          this.$store.dispatch('editUser', this.editedUsers);
+          this.editedUsers = {
+                user_ID: null,
+                user_Name: null,
+                user_Surname: null,
+                user_Age: null,
+                user_Gender: null,
+                user_Email: null,
+                user_Password: null,
+                user_Role: null,
+                user_Image: null,
+          }
+        }catch(err){
+          console.error(err);
+        }
     },
   },
 
   mounted(){
-    // this.displayAdmins()
-    this.displayOneAdmin()
+    this.displayUsers()
+    // this.displayOneUser()
   }
 }
 </script>
 
 <style>
-
+h1{
+  text-align: left;
+  color: #6400C7;
+}
 </style>

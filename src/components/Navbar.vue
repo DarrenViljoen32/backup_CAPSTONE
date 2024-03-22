@@ -17,7 +17,7 @@
               <router-link @click.native="closeNavbar" to="/about" class="nav-link"><span class="bi bi-person"></span> | About</router-link> 
               <router-link @click.native="closeNavbar" to="/contact" class="nav-link"><span class="bi bi-envelope-at"></span> | Contact Us</router-link> 
               <router-link @click.native="closeNavbar" to="/admin" class="nav-link"><span class="bi bi-file"></span> | Admin</router-link> 
-              <router-link @click.native="closeNavbar" to="/profile" class="nav-link"><span class="bi bi-file-person"></span> | Profile</router-link>
+              <!-- <router-link @click.native="closeNavbar" to="/profile" class="nav-link"><span class="bi bi-file-person"></span> | Profile</router-link> -->
 
             </div>
           </div>

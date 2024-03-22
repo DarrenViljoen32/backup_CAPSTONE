@@ -75,9 +75,6 @@ export default createStore({
       }
     },
 
-    //get user details
-    
-
     //delete user
     async deleteUser({commit}, user_ID){
       try{
@@ -297,7 +294,7 @@ export default createStore({
         }else{
           Swal.fire("Successfully Added a Post.")
         }
-        window.location.reload()
+        // window.location.reload()
       }catch(err){
         console.error('Error adding post ', err);
         Swal.fire('Error adding post ', err)

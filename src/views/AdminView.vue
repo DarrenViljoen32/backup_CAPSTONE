@@ -1,9 +1,18 @@
 <template>
     <div class="view">
-        <router-link to="/"><button v-if="$cookies.get('jwt')" @click="logout">Log Out</button></router-link>
-        <br><br>
-        <h1>Administration</h1>
-        <br><br>
+
+      <div class="row">
+        <div class="col-1"></div>
+        <div class="col-7">
+          <h1>Administration</h1>
+          <br><br>
+        </div>
+        <div class="col">
+          <router-link to="/"><button v-if="$cookies.get('jwt')" @click="logout" class="btn btn-primary">Log Out</button></router-link>
+          <br><br>
+        </div>
+        <div class="col-1"></div>
+      </div>
           
           
           
@@ -34,8 +43,8 @@
                   <br><br>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" data-bs-dismiss="modal">Close</button>
-                  <button type="button" @click="addUser">Add</button>
+                  <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Close</button>
+                  <button type="button" @click="addUser" class="btn btn-primary">Add</button>
                 </div>
               </div>
             </div>
@@ -68,8 +77,8 @@
                   <br><br>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" data-bs-dismiss="modal">Close</button>
-                  <button @click="userEdit">Save</button>
+                  <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Close</button>
+                  <button @click="userEdit" class="btn btn-primary">Save</button>
                 </div>
               </div>
             </div>
@@ -92,8 +101,8 @@
                   <br><br>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" data-bs-dismiss="modal">Close</button>
-                  <button type="button" @click="addTag">Add</button>
+                  <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Close</button>
+                  <button type="button" @click="addTag" class="btn btn-primary">Add</button>
                 </div>
               </div>
             </div>
@@ -115,8 +124,8 @@
                   <br><br>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" data-bs-dismiss="modal">Close</button>
-                  <button @click="tagEdit">Save</button>
+                  <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Close</button>
+                  <button @click="tagEdit" class="btn btn-primary">Save</button>
                 </div>
               </div>
             </div>
@@ -140,8 +149,8 @@
                   <br><br>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" data-bs-dismiss="modal">Close</button>
-                  <button type="button" @click="addPost">Add</button>
+                  <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Close</button>
+                  <button type="button" @click="addPost" class="btn btn-primary">Add</button>
                 </div>
               </div>
             </div>
@@ -164,8 +173,8 @@
                   <br><br>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" data-bs-dismiss="modal">Close</button>
-                  <button @click="postEdit">Save</button>
+                  <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Close</button>
+                  <button @click="postEdit" class="btn btn-primary">Save</button>
                 </div>
               </div>
             </div>
@@ -183,7 +192,7 @@
             </div>
 
             <div class="col-lg-6" id="crudIcons">
-              <button data-bs-toggle="modal" data-bs-target="#exampleModal3" class="bi bi-plus-lg" title="Add User" @click="clearInput"></button>Add User
+              <button data-bs-toggle="modal" data-bs-target="#exampleModal3" class="bi bi-plus-lg btn btn-primary" title="Add User" @click="clearInput"></button>Add User
             </div>
           </div>
 
@@ -215,10 +224,10 @@
                 <td>{{ user.user_Role }}</td>
                 <td><img v-bind:src= "user.user_Image" alt="Profile Photo" class="img-fluid"></td>
                 <td>
-                  <button class="bi bi-pencil" title="Edit User" @click="populateUserFields(user)" data-bs-toggle="modal" data-bs-target="#exampleModal4"></button>
+                  <button class="bi bi-pencil btn btn-primary" title="Edit User" @click="populateUserFields(user)" data-bs-toggle="modal" data-bs-target="#exampleModal4"></button>
                 </td>
                 <td>
-                  <button class="bi bi-dash-lg" title="Delete User" @click="deleteUser(user.user_ID)"></button>
+                  <button class="bi bi-dash-lg btn btn-primary" title="Delete User" @click="deleteUser(user.user_ID)"></button>
                 </td>
               </tr>
             </tbody>
@@ -242,7 +251,7 @@
             </div>
 
             <div class="col-lg-6" id="crudIcons">
-              <button data-bs-toggle="modal" data-bs-target="#exampleModal00" class="bi bi-plus-lg" title="Add Post" @click="clearPostInput"></button>Add Post
+              <button data-bs-toggle="modal" data-bs-target="#exampleModal00" class="bi bi-plus-lg btn btn-primary" title="Add Post" @click="clearPostInput"></button>Add Post
             </div>
 
           </div>
@@ -265,10 +274,10 @@
                 <td>{{ post.post_Content }}</td>
                 <!-- <td>{{ post.user_ID }}</td> -->
                 <td>
-                  <button class="bi bi-pencil" title="Edit Post" @click="populatePostFields(post)" data-bs-toggle="modal" data-bs-target="#exampleModal01"></button>
+                  <button class="bi bi-pencil btn btn-primary" title="Edit Post" @click="populatePostFields(post)" data-bs-toggle="modal" data-bs-target="#exampleModal01"></button>
                 </td>
                 <td>
-                  <button class="bi bi-dash-lg" title="Delete Post" @click="deletePost(post.post_ID)"></button>
+                  <button class="bi bi-dash-lg btn btn-primary" title="Delete Post" @click="deletePost(post.post_ID)"></button>
                 </td>
               </tr>
             </tbody>
@@ -289,7 +298,7 @@
             </div>
 
             <div class="col-lg-6" id="crudIcons">
-              <button data-bs-toggle="modal" data-bs-target="#exampleModal6" class="bi bi-plus-lg" title="Add Tag" @click="clearTagInput"></button>Add Tag
+              <button data-bs-toggle="modal" data-bs-target="#exampleModal6" class="bi bi-plus-lg btn btn-primary" title="Add Tag" @click="clearTagInput" ></button>Add Tag
             </div>
 
           </div>
@@ -308,10 +317,10 @@
                 <th>{{ tag.tag_ID }}</th>
                 <td>{{ tag.tag_Name }}</td>
                 <td>
-                  <button class="bi bi-pencil" title="Edit Tag" @click="populateTagFields(tag)" data-bs-toggle="modal" data-bs-target="#exampleModal8"></button>
+                  <button class="bi bi-pencil btn btn-primary" title="Edit Tag" @click="populateTagFields(tag)" data-bs-toggle="modal" data-bs-target="#exampleModal8"></button>
                 </td>
                 <td>
-                <button class="bi bi-dash-lg" title="Delete Tag" @click="deleteTag(tag.tag_ID)"></button>
+                <button class="bi bi-dash-lg btn btn-primary" title="Delete Tag" @click="deleteTag(tag.tag_ID)"></button>
                 </td>
               </tr>
             </tbody>
@@ -356,7 +365,7 @@ export default{
             user_Gender: null,
             user_Email: null,
             user_Password: null,
-            user_Role: null,
+            user_Role: "User",
             user_Image: null,
             
             editedUsers: {
@@ -679,7 +688,10 @@ export default{
 *::-webkit-scrollbar{
   display: none;
 }
-
+h1{
+  color: #6400C7;
+  text-align: left;
+}
 #subTitle{
   text-align: left;
   margin-left: 25px;

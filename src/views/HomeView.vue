@@ -31,7 +31,7 @@
             <button type="button" @click="addPost" class="btn btn-primary">Post</button>
           </form>
           <br><br><br>
-
+<!-- 
           <h3 id="sortfilter">Sort & Filter</h3>
           <br>
 
@@ -40,11 +40,11 @@
             <br>
           </form>
             <!-- <button>Search <span class="bi bi-search"></span></button>
-            <br><br> -->
+            <br><br>
             <button class="btn btn-primary">Sort By Date <span class="bi bi-filter"></span></button>
             <br><br>
             <button class="btn btn-primary">Sort By Name <span class="bi bi-filter"></span></button>
-            <br><br>
+            <br><br> -->
 
         </div>
 
@@ -83,13 +83,6 @@
       <Spinner/>
     </div>
 
-    <div v-if="userDetails">
-      <h1>{{ userDetails.user_Name }}</h1>
-    </div>
-    <div v-else>
-      <p>loading user details...</p>
-    </div>
-
   </div>
 </template>
 
@@ -104,7 +97,6 @@ export default {
     return{
       posts: [],
       users: [],
-      userDetails: null,
 
       loadingPosts : true,
       loadingUsers : true,
@@ -136,8 +128,7 @@ export default {
   },
 
   created() {
-    // Fetch user details from local storage or Vuex store
-    this.fetchUserDetails();
+
   },
 
   methods:{
@@ -167,28 +158,31 @@ export default {
       }
     },
 
-    async deletePost(post_ID){
+    deletePost(post_ID){
       try{
-        await this.$store.dispatch('deletePost', post_ID)
+        this.$store.dispatch('deletePost', post_ID)
       }catch(err){
         console.error(err);
       }
     },
 
-    async addPost(){
+    addPost(){
       try{
-        const postContent = this.post_Content.trim()
-        if(postContent){
-          await this.$store.dispatch('addPost', {post_Content: postContent})
-            .then(() => {
-              this.post_Content = ''
-            })
-            .catch(error => {
-              console.error('Error adding post:', error);
-            })
-        }else{
-          console.error('Post Content cannot be empty.');
-        }
+        this.$store.dispatch('addPost', this.$data)
+        // const postTitle = this.post_Title.trim()
+        // const postContent = this.post_Content.trim()
+        // if(postContent){
+        //   this.$store.dispatch('addPost', {post_Title: postTitle, post_Content: postContent})
+        //     .then(() => {
+        //       this.post_Title = ''
+        //       this.post_Content = ''
+        //     })
+        //     .catch(error => {
+        //       console.error('Error adding post:', error);
+        //     })
+        // }else{
+        //   console.error('Post Content cannot be empty.');
+        // }
       }catch(err){
         console.error('Error adding post:', err);
       }
@@ -249,17 +243,6 @@ export default {
       const user = this.users.find(user => user.user_ID === userid)
       return user ? user.user_Email: 'Unknown'
     },
-
-    async fetchUserDetails(){
-      try{
-        const response = await axios.get('/userDetails')
-
-        this.userDetails = response.data.userDetails
-      }catch(error){
-        console.error('Error fetching user details: ', error);
-      }
-    }
-
   },
 
   mounted(){
@@ -282,6 +265,7 @@ export default {
 h1{
   text-align: left;
   margin-left: 5px;
+  color: #6400C7;
 }
 h3{
   text-align: left;

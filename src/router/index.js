@@ -47,7 +47,8 @@ const routes = [
   {
     path: '/admin',
     name: 'admin',
-    component: () => import('../views/AdminView.vue')
+    component: () => import('../views/AdminView.vue'),
+    meta: {requiresAdmin: true}
   },
   {
     path: '/profile',
@@ -60,5 +61,19 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 })
+
+// router.beforeEach((to, from, next)=>{
+//   requiresAdmin = false
+//   if(to.matched.some(record => record.meta.requiresAdmin)){
+//     if($store.state.users.user_Role === 'Admin'){
+//       requiresAdmin = true
+//       next()
+//     }else{
+//       next('/login')
+//     }
+//   }else{
+//     next()
+//   }
+// })
 
 export default router
