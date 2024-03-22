@@ -18,11 +18,11 @@ const auth = async (req, res, next) => {
             })
         }
         if(result === true){
-            // const {user_Email} = req.body
-            const {user_ID, user_Name, user_Email} = req.body
+            const {user_Email} = req.body
+            // const {user_ID, user_Name, user_Email} = req.body
             const token = jwt.sign(
-                // {user_Email:user_Email},
-                {user_ID, user_Name, user_Email},
+                {user_Email:user_Email},
+                // {user_ID, user_Name, user_Email},
                 process.env.SECRET_KEY,
                 {expiresIn: '8h'}
             ) 
